@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>跟著 Allan 走特富野古道</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="由導遊 Allan 帶路的特富野古道互動導覽：歷史、旅遊、環境、人文、交通路線動畫與古道小遊戲。">
+<link rel="icon" href="assets/allan/face-smile.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@400;600&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top">特富野古道<span class="brand-km">6.32K</span></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="#facts">古道檔案</a>
+      <a href="#facets">四大面向</a>
+      <a href="#go">怎麼去</a>
+      <a href="#walk">一起走</a>
+      <a href="#games">遊戲場</a>
+      <a href="#passport">護照</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero band">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">阿里山・自忠 → 特富野・海拔 2,280 → 1,800 m</p>
+        <h1>跟著 Allan<br>走一趟特富野古道</h1>
+        <p class="lede">鄒族的獵徑、日治時期的運材鐵道、一整片柳杉與闊葉林。選好你的交通方式，Allan 從出發點就陪你一起上山。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#go">選擇交通方式出發</a>
+          <a class="btn btn-ghost" href="#games">先玩遊戲</a>
+        </div>
+      </div>
+      <figure class="hero-allan">
+        <img src="assets/allan/wave.webp" alt="導遊 Allan 揮手打招呼" width="548" height="640">
+        <figcaption class="bubble bubble-left">嗨，我是 Allan！今天由我當你的領隊。</figcaption>
+      </figure>
+    </div>
+    <div class="sleepers" aria-hidden="true"></div>
+  </section>
+
+  <!-- Facts -->
+  <section id="facts" class="band">
+    <div class="wrap">
+      <h2 class="sec-title"><span class="kmpost">0K</span>古道檔案</h2>
+      <div class="facts" id="factGrid"></div>
+      <div class="status" id="statusBox"></div>
+    </div>
+  </section>
+
+  <!-- Facets -->
+  <section id="facets" class="band band-alt">
+    <div class="wrap">
+      <h2 class="sec-title"><span class="kmpost">1K</span>四大面向</h2>
+      <div class="tabs" role="tablist" id="facetTabs"></div>
+      <div class="facet-panel" id="facetPanel" role="tabpanel"></div>
+    </div>
+  </section>
+
+  <!-- Transport -->
+  <section id="go" class="band">
+    <div class="wrap">
+      <h2 class="sec-title"><span class="kmpost">2K</span>怎麼去？Allan 陪你出發</h2>
+      <p class="sec-lede">先選你從哪裡來、用什麼方式上山，按「出發」後 Allan 會一站一站陪你走到自忠登山口。</p>
+
+      <div class="planner">
+        <div class="planner-row">
+          <span class="planner-label" id="originLabel">我從</span>
+          <div class="chips" id="originChips" role="radiogroup" aria-labelledby="originLabel"></div>
+        </div>
+        <div class="planner-row">
+          <span class="planner-label" id="modeLabel">搭乘</span>
+          <div class="chips chips-mode" id="modeChips" role="radiogroup" aria-labelledby="modeLabel"></div>
+        </div>
+      </div>
+
+      <div class="journey">
+        <div class="map-wrap">
+          <svg id="routeMap" viewBox="0 0 1000 560" role="img" aria-label="嘉義到特富野古道示意路線圖"></svg>
+          <p class="map-note">示意圖，非實際比例</p>
+        </div>
+        <aside class="guide-card" aria-live="polite">
+          <div class="guide-head">
+            <img id="guideFace" src="assets/allan/face-smile.webp" alt="Allan 的表情" width="80" height="80">
+            <div>
+              <p class="guide-stop" id="guideStop">準備出發</p>
+              <p class="guide-meta" id="guideMeta">選好交通方式後按「出發」</p>
+            </div>
+          </div>
+          <p class="guide-say" id="guideSay">我會在每一站告訴你要注意什麼。</p>
+          <div class="guide-actions">
+            <button class="btn btn-primary" id="tripStart" type="button">出發</button>
+            <button class="btn btn-ghost" id="tripNext" type="button" disabled>下一站</button>
+          </div>
+          <ul class="tips" id="modeTips"></ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Walk -->
+  <section id="walk" class="band band-forest">
+    <div class="wrap">
+      <h2 class="sec-title"><span class="kmpost">3.7K</span>一起走古道</h2>
+      <p class="sec-lede">從自忠 0K 出發，每到一站 Allan 會停下來講解，順便收集一張「古道發現卡」。</p>
+
+      <div class="scene" id="scene" data-scene="cedar">
+        <div class="scene-sky"></div>
+        <canvas class="scene-canvas" id="sceneCanvas" aria-hidden="true"></canvas>
+        <img class="walker" id="walker" src="assets/allan/side-right.webp" alt="Allan 走在古道上" width="132" height="520">
+        <div class="scene-km" id="sceneKm">0.00K</div>
+        <div class="scene-ele" id="sceneEle">海拔 2,280 m</div>
+      </div>
+
+      <div class="walk-ui">
+        <div class="walk-card" aria-live="polite">
+          <div class="guide-head">
+            <img id="walkFace" src="assets/allan/face-smile.webp" alt="Allan 的表情" width="80" height="80">
+            <div>
+              <p class="guide-stop" id="walkTitle">自忠登山口</p>
+              <p class="guide-meta" id="walkMeta">0K</p>
+            </div>
+          </div>
+          <p class="guide-say" id="walkSay"></p>
+          <div class="find" id="walkFind"></div>
+          <div class="guide-actions">
+            <button class="btn btn-ghost" id="walkBack" type="button">← 上一站</button>
+            <button class="btn btn-primary" id="walkNext" type="button">繼續走 →</button>
+          </div>
+        </div>
+        <div class="profile-wrap">
+          <p class="profile-title">海拔剖面</p>
+          <svg id="profile" viewBox="0 0 600 220" role="img" aria-label="特富野古道海拔剖面圖"></svg>
+          <div class="cards-mini" id="findCards"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Games -->
+  <section id="games" class="band">
+    <div class="wrap">
+      <h2 class="sec-title"><span class="kmpost">5K</span>古道遊戲場</h2>
+      <div class="game-tabs tabs" role="tablist" id="gameTabs">
+        <button role="tab" type="button" data-game="quiz" aria-selected="true">古道知識王</button>
+        <button role="tab" type="button" data-game="runner" aria-selected="false">枕木跳跳</button>
+        <button role="tab" type="button" data-game="detective" aria-selected="false">森林偵探</button>
+        <button role="tab" type="button" data-game="pack" aria-selected="false">行前背包</button>
+      </div>
+
+      <div class="game" id="game-quiz">
+        <div class="quiz">
+          <div class="quiz-side">
+            <img id="quizFace" src="assets/allan/face-think.webp" alt="Allan 的表情" width="160" height="160">
+            <p class="quiz-score" id="quizScore">第 1 / 8 題・0 分</p>
+          </div>
+          <div class="quiz-main">
+            <p class="quiz-q" id="quizQ"></p>
+            <div class="quiz-opts" id="quizOpts"></div>
+            <p class="quiz-why" id="quizWhy" aria-live="polite"></p>
+            <button class="btn btn-primary" id="quizNext" type="button" hidden>下一題</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="game" id="game-runner" hidden>
+        <p class="game-howto">幫 Allan 從 0K 跑到 6.32K！按空白鍵或點畫面跳過倒木和水窪，順手撿起別人留下的垃圾（+20 分）。</p>
+        <div class="runner-wrap">
+          <canvas id="runner" width="900" height="300" aria-label="枕木跳跳遊戲畫面"></canvas>
+          <div class="runner-overlay" id="runnerOverlay">
+            <p id="runnerMsg">準備好了嗎？</p>
+            <button class="btn btn-primary" id="runnerStart" type="button">開始</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="game" id="game-detective" hidden>
+        <p class="game-howto">森林裡躲了 6 種動物，60 秒內把牠們找出來。點到就會看到牠的小檔案。</p>
+        <div class="detective-bar">
+          <span id="detCount">找到 0 / 6</span>
+          <span id="detTime">60 秒</span>
+          <button class="btn btn-ghost btn-sm" id="detStart" type="button">重新開始</button>
+        </div>
+        <div class="forest" id="forest" aria-label="森林偵探畫面"></div>
+        <p class="det-info" id="detInfo" aria-live="polite">按「重新開始」開始找。</p>
+      </div>
+
+      <div class="game" id="game-pack" hidden>
+        <p class="game-howto">幫 Allan 打包古道背包：點選要帶的東西，選好按「檢查背包」。</p>
+        <div class="pack">
+          <div class="gear-grid" id="gearGrid"></div>
+          <aside class="pack-side">
+            <img id="packFace" src="assets/allan/face-smile.webp" alt="Allan 的表情" width="120" height="120">
+            <p id="packSay" aria-live="polite">步道裡沒有廁所、沒有水、沒有商店，你要帶什麼？</p>
+            <button class="btn btn-primary" id="packCheck" type="button">檢查背包</button>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Passport -->
+  <section id="passport" class="band band-alt">
+    <div class="wrap">
+      <h2 class="sec-title"><span class="kmpost">6.32K</span>古道護照</h2>
+      <p class="sec-lede">完成任務就蓋一個章。紀錄只存在你自己的瀏覽器裡。</p>
+      <div class="stamps" id="stamps"></div>
+      <button class="btn btn-ghost btn-sm" id="stampReset" type="button">清除護照紀錄</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer band">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-title">資料來源與提醒</p>
+      <p>內容整理於 2026 年 10 月，數字標「約」者為多方資料整理的概略值。步道開放狀態、班次、票價隨時調整，出發前請以官方公告為準。</p>
+    </div>
+    <ul class="sources">
+      <li><a href="https://recreation.forest.gov.tw/Trail/RT?tr_id=081" target="_blank" rel="noopener">台灣山林悠遊網：特富野古道</a></li>
+      <li><a href="https://hiking.biji.co/index.php?q=trail&act=detail&id=315" target="_blank" rel="noopener">健行筆記：特富野古道路況</a></li>
+      <li><a href="https://www.ali-nsa.net/zh-tw/attractions/detail/503" target="_blank" rel="noopener">阿里山國家風景區：特富野古道</a></li>
+      <li><a href="https://afrch.forest.gov.tw/0000119" target="_blank" rel="noopener">阿里山林業鐵路：時刻表及票價</a></li>
+      <li><a href="https://www.moa.gov.tw/ws.php?id=2500694" target="_blank" rel="noopener">農業部：懷舊森鐵古道情</a></li>
+      <li><a href="https://smiletaiwan.cw.com.tw/article/8277" target="_blank" rel="noopener">微笑台灣：特富野古道整修與景觀大獎</a></li>
+      <li><a href="https://supertaste.tvbs.com.tw/travel/345706" target="_blank" rel="noopener">TVBS：古道整修後重新開放</a></li>
+    </ul>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/games.js"></script>
+</body>
+</html>
