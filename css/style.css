@@ -349,3 +349,7 @@ button { font: inherit; }
   .hero-allan img, .walker.walking { animation: none; }
   .btn, .critter { transition: none; }
 }
+.credits {
+  margin-top: 28px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--forest-ink) 30%, transparent);
+  display: flex; gap: 8px 24px; flex-wrap: wrap; font-size: .85rem; opacity: .85;
+}
